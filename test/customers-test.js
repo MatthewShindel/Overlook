@@ -181,6 +181,17 @@ describe('Customer tests', () => {
 			let response = filterRoomsByDate(testDate,testRooms,testBookings)
 			expect(response).to.deep.equals(testRooms);
 		})
+		it('Should return an error if the filterRooms array is empty', () => {
+			testDate = "2022/04/22"
+			testBookings = [{ "id": "5fwrgu4i7k55hl6sz", "userID": 4, "date": "2022/04/22", "roomNumber": 3 },
+			{ "id": "5fwrgu4i7k55hl6t5", "userID": 2, "date": "2022/04/22", "roomNumber": 2 },
+			{ "id": "5fwrgu4i7k55hl6t6", "userID": 4, "date": "2022/04/22", "roomNumber": 3 },
+			{ "id": "5fwrgu4i7k55hl6t7", "userID": 2, "date": "2022/04/22", "roomNumber": 4 },
+			{ "id": "5fwrgu4i7k55hl6t8", "userID": 1, "date": "2022/04/22", "roomNumber": 5 },
+			{ "id": "5fwrgu4i7k55hl6t9", "userID": 38, "date": "2022/04/22", "roomNumber": 1 }];
+			let response = filterRoomsByDate(testDate,testRooms,testBookings)
+			expect(response).to.deep.equals("Error: There are no rooms available on that specific date.");
+		})
 	});
 	describe("generateDateString" , () => {
 		it('Should be generate a string for date to use for searches', () => {

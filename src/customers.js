@@ -71,7 +71,11 @@ function filterRoomsByDate(specificDate, roomsArray, bookingsArray) {
 			(booking.roomNumber === room.number && booking.date === specificDate)
 		)
 	})
-	return openRooms;
+	if (openRooms.length === 0) {
+		return "Error: There are no rooms available on that specific date."
+	} else {
+		return openRooms;
+	}
 }
 
 function generateDateString(year, month, day) {
