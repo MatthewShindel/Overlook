@@ -92,14 +92,33 @@ function generateDateString(year, month, day) {
     default:  
 			return dateString;
   }
-	
 }
 
-function testFetch() {
-	let apiUrl = 'http://localhost:3001/api/v1/customers';
+function testFetch(apiType) {
+	let apiUrl = `http://localhost:3001/api/v1/${apiType}`;
 	fetch(apiUrl)
 		.then(response => response.json())
 		.then(data => console.log(data));
+}
+
+function addNewBooking(user,dateString,roomNumber) {
+	return fetch('http://localhost:3001/api/v1/bookings', {
+    method: 'POST',
+    body: JSON.stringify({
+      "userID": user.id,
+      "date": dateString,
+			"roomNumber":roomNumber,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }) 
+	.then((response) => {
+		if (!response.ok)
+			throw new Error(`Failed to add booking. Status: ${response.status}`);
+		return response.json();
+	})
+	.catch((error) => console.log('Error adding booking to bookings API'));
 }
 
 export {
