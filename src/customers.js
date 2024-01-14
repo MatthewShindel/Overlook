@@ -75,7 +75,24 @@ function filterRoomsByDate(specificDate, roomsArray, bookingsArray) {
 }
 
 function generateDateString(year, month, day) {
-	return
+	const dateString = `${year}/${month}/${day}`
+  const numericYear = parseInt(year, 10);
+  const numericMonth = parseInt(month, 10);
+  const numericDay = parseInt(day, 10);
+
+  switch (true) {
+    case isNaN(numericYear) || isNaN(numericMonth) || isNaN(numericDay):
+      return 'Invalid input: Please provide valid values for year, month, and day.';
+    case numericYear < 1990 || numericYear > 2099:
+      return 'Invalid year: Please provide a valid year.';
+    case numericMonth < 1 || numericMonth > 12:
+      return 'Invalid month: Please provide a month between 1 and 12.';
+    case numericDay < 1 || numericDay > 31:
+      return 'Invalid day: Please provide a day between 1 and 31.';
+    default:  
+			return dateString;
+  }
+	
 }
 
 function testFetch() {

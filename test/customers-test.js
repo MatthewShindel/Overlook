@@ -183,13 +183,21 @@ describe('Customer tests', () => {
 		})
 	});
 	describe("generateDateString" , () => {
-		it.skip('Should be generate a string for date to use for searches', () => {
+		it('Should be generate a string for date to use for searches', () => {
 			let response = generateDateString("2023","02","25");
 			expect(response).to.deep.equals("2023/02/25");
 		})
-		it.skip('Should return an error if ', () => {
-			let response = generateDateString("2023","02","25");
-			expect(response).to.deep.equals("2023/02/25");
+		it('Should return an error if any variable is not valid', () => {
+			let response1 = generateDateString("2023","02","45");
+			let response2 = generateDateString("2023","21","25");
+			let response3 = generateDateString("3023","02","25");
+			let response4 = generateDateString("1923","02","25");
+			let response5 = generateDateString("Potato","Tomato","25");	
+			expect(response1).to.deep.equals("Invalid day: Please provide a day between 1 and 31.");
+			expect(response2).to.deep.equals("Invalid month: Please provide a month between 1 and 12.");
+			expect(response3).to.deep.equals("Invalid year: Please provide a valid year.");
+			expect(response4).to.deep.equals("Invalid year: Please provide a valid year.");
+			expect(response5).to.deep.equals("Invalid input: Please provide valid values for year, month, and day.");
 		})
 
 	})
