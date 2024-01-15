@@ -98,11 +98,26 @@ function generateDateString(year, month, day) {
   }
 }
 
-function testFetch(apiType) {
-	let apiUrl = `http://localhost:3001/api/v1/${apiType}`;
-	fetch(apiUrl)
+function getAllRoomTypes(roomsArray) {
+	let finalArray = [...new Set(roomsArray.map(item => item.roomType))]
+	return finalArray.replace(/\b\w/g, match => match.toUpperCase()); //regex
+	// return finalArray.map(str => str.toUpperCase());
+	// return finalArray;
+}
+
+function apiFetch(apiType) {
+	let apiUrl;
+	if(apiType === 'customers'){
+		apiUrl = `http://localhost:3001/api/v1/${apiType}/25`;
+		return fetch(apiUrl)
+			.then(response => response.json())
+			// .then(data => console.log(data)); 
+			//above line for testing
+	}else {
+		apiUrl = `http://localhost:3001/api/v1/${apiType}`
+		return fetch(apiUrl)
 		.then(response => response.json())
-		.then(data => console.log(data));
+	}
 }
 
 function addNewBooking(user,dateString,roomNumber) {
@@ -125,13 +140,17 @@ function addNewBooking(user,dateString,roomNumber) {
 	.catch((error) => console.log('Error adding booking to bookings API'));
 }
 
+console.log('hello world! customers.js has been properly imported');
+
 export {
 	getCustomerBooking,
 	filterBookingsByUser,
 	getTotalSpent,
 	filterRoomsByType,
 	filterRoomsByDate,
-	generateDateString
+	generateDateString,
+	apiFetch,
+	getAllRoomTypes
 }
 
 // testFetch();

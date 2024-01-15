@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Explore Yosemite</title>
 </head>
+
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
+	<header>Explore Yosemite</header>
+	<nav>
+		<ul>
+			<li><a href="#" class="about-yosemite">About Alaska</a></li>
+			<li><a href="#" class="available-bookings">See Available Bookings</a></li>
+			<li><a href="#" class="my-account">My Account</a></li>
+		</ul>
+	</nav>
+	<!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+	<main>
+		<section class="about-yosemite-article">
+			<article>
+				<title>About Yosemite</title>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+					magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.</p>
+			</article>
+		</section>
+		<section class="available-bookings-form">
+			<label for="select-booking-date">Choose a Date:</label>
+			<input type="date" id="select-booking-date" name="Select Date" min="2020-01-13" max="2050-01-01">
+			<button class="submit-btn" id="submit-date">Submit Date</button>
+		</section>
+
+		<section class="rooms-type-form">
+			<title>What Kind of Room are you looking for?</title>
+			<h1>What Kind of Room are you looking for?</h1>
+			<div class="rooms-type-buttons-section">
+
+			</div>
+		</section>
+
+	</main>
+
+	<footer></footer>
+	<script src="bundle.js"></script>
 
 </body>
+
 </html>
