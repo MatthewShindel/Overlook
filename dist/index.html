@@ -5,39 +5,77 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
 	<title>Explore Yosemite</title>
 </head>
 
 <body>
-	<header>Explore Yosemite</header>
+	<h1>Explore Yosemite</h1>
 	<nav>
+		<input type="button" value="&#9776; Open User Info" class="user-open-button">
 		<ul>
-			<li><a href="#" class="about-yosemite">About Alaska</a></li>
-			<li><a href="#" class="available-bookings">See Available Bookings</a></li>
-			<li><a href="#" class="my-account">My Account</a></li>
+			<li><input type="button" value="Available Bookings" class="available-bookings"></li>
+			<li><input type="button" value="About Yosemite" class="about-yosemite"></li>
+			<li><input type="button" value="My Account" class="my-account"></li>
 		</ul>
 	</nav>
-	<!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
 	<main>
 		<section class="about-yosemite-article">
 			<article>
-				<title>About Yosemite</title>
+				<h1>About Yosemite</h1>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
 					magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 					consequat.</p>
 			</article>
 		</section>
-		<section class="available-bookings-form">
+
+		<section id="user-sidebar" class="sideBar">
+			<p href="javascript:void(0)" class="user-close-button">&times;</p>
+			<div class="user-sidebar-information">
+
+			</div>
+		</section>
+
+		<section class="select-booking-date-section hidden">
 			<label for="select-booking-date">Choose a Date:</label>
 			<input type="date" id="select-booking-date" name="Select Date" min="2020-01-13" max="2050-01-01">
 			<button class="submit-btn" id="submit-date">Submit Date</button>
 		</section>
 
-		<section class="rooms-type-form">
-			<title>What Kind of Room are you looking for?</title>
-			<h1>What Kind of Room are you looking for?</h1>
+		<section class="rooms-type hidden">
+			<h2>What Kind of Room are you looking for?</h2>
 			<div class="rooms-type-buttons-section">
 
+			</div>
+		</section>
+
+		<section class="available-rooms hidden">
+			<h2>Available Rooms</h2>
+			<h3>Here are the available Rooms</h3>
+			<div class="final-rooms-section"></div>
+
+		</section>
+		
+		<section id="confirm-modal" class="w3-modal">
+			<div class="w3-modal-content">
+				<div class="w3-container final-room-modal">
+					<span onclick="document.getElementById('confirm-modal').style.display='none'" class="w3-button w3 display-topright">&times;</span>
+					<h4>Confirm Booking?</h4>
+					<p class="final-room-modal-text"></p>
+					<input type="button" class="confirm-room-button" value="Confirm Room Booking">
+				</div>
+			</div>
+		</section>
+
+		<section id="apology-modal" class="w3-modal">
+			<div class="w3-modal-content">
+				<div class="w3-container final-room-modal">
+					<span onclick="document.getElementById('apology-modal').style.display='none'" class="w3-button w3 display-topright">&times;</span>
+					<h4>We are so sorry, there are No Room available on this date! Please Forgive the inconvience and choose another date!</h4>
+				</div>
 			</div>
 		</section>
 

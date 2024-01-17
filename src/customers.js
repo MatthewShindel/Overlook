@@ -100,10 +100,9 @@ function generateDateString(year, month, day) {
 
 function getAllRoomTypes(roomsArray) {
 	let finalArray = [...new Set(roomsArray.map(item => item.roomType))]
-	return finalArray.replace(/\b\w/g, match => match.toUpperCase()); //regex
-	// return finalArray.map(str => str.toUpperCase());
-	// return finalArray;
+	return finalArray
 }
+
 
 function apiFetch(apiType) {
 	let apiUrl;
@@ -121,22 +120,25 @@ function apiFetch(apiType) {
 }
 
 function addNewBooking(user,dateString,roomNumber) {
+	// console.log("Inputs for addNewBooking: ",user.id,dateString,roomNumber);
+	// console.log("Typeof: ",typeof user.id, typeof dateString, typeof roomNumber);
+
 	return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
+		headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
       "userID": user.id,
       "date": dateString,
-			"roomNumber":roomNumber,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+			"roomNumber":Number(roomNumber)
+    })
   }) 
 	.then((response) => {
 		if (!response.ok)
 			throw new Error(`Failed to add booking. Status: ${response.status}`);
 		return response.json();
-	})
+	}).then( data => console.log('success!')).then()
 	.catch((error) => console.log('Error adding booking to bookings API'));
 }
 
@@ -150,7 +152,8 @@ export {
 	filterRoomsByDate,
 	generateDateString,
 	apiFetch,
-	getAllRoomTypes
+	getAllRoomTypes,
+	addNewBooking
 }
 
 // testFetch();

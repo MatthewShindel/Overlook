@@ -1,4 +1,70 @@
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  display: flex;
+	flex-direction: column;
 	background: none;
+	justify-content: center;
+	align-items: center;
+	font-family: 'IBM Plex Serif', serif;
+}
+
+nav ul{
+	display: flex;
+	flex-direction: row;
+	list-style-type: none;
+}
+
+title {
+	font-weight: 400;
+	font-size: 50px;
+}
+
+.user-open-button{
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 15px;
+}
+
+.w3-container{
+	display: flex;
+	
+}
+
+
+.hidden {
+	display: none;
+}
+
+.sideBar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #6b1b1b;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sideBar p {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sideBar p:hover {
+  color: #f1f1f1;
+}
+
+.sideBar .user-close-button {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
 }
