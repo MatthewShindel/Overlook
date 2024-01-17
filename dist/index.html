@@ -1,16 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
-</head>
-<body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
 
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+	<title>Explore Yosemite</title>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Explore Yosemite</h1>
+		<input role="tab" alt="User Info Tab" type="button" value="&#9776;" class="user-open-button">
+		<nav>
+			<ul>
+				<li><input type="button" value="Available Bookings" class="available-bookings nav-button"></li>
+				<li><input type="button" value="About Yosemite" class="about-yosemite nav-button"></li>
+				<li><input type="button" value="Login as Different User" class="new-user-login nav-button"></li>
+			</ul>
+		</nav>
+		<main>
+			<section class="about-yosemite-article">
+				<article>
+					<h1>About the Overlook Lodge</h1>
+					<p>Discover an exceptional retreat seamlessly integrated with the splendor of Yosemite National Park – welcome to the OverLook Lodge! Our hotel invites you to an unparalleled experience, where the allure of nature converges with the comfort of premium accommodations. Situated at the threshold of Yosemite in the Sierra Nevada mountains of California, the OverLook Lodge offers a gateway to the park's extraordinary features, including towering granite cliffs, majestic waterfalls, and ancient sequoia trees. As our cherished guest, you'll enjoy a stay that seamlessly blends the charm of the lodge with the awe-inspiring beauty of one of America's most iconic national treasures.</p>
+					<p>Nestled in the heart of Yosemite Valley, the OverLook Lodge positions you mere moments away from the park's renowned attractions. Wake up to panoramic views of El Capitan and Half Dome, setting the stage for a day filled with exploration and adventure. Whether you're an avid hiker, a nature enthusiast, or someone seeking a serene escape, our lodge ensures the perfect balance of convenience and proximity to Yosemite's wonders. Picture yourself returning to the warm embrace of the OverLook Lodge after a day of discovery, where the spirit of Yosemite seamlessly extends into every aspect of your lodging experience.</p>
+				</article>
+			</section>
+
+			<section id="user-sidebar" class="sideBar">
+				<p href="javascript:void(0)" class="user-close-button">&times;</p>
+				<div class="user-sidebar-information">
+				</div>
+			</section>
+
+			<section class="select-booking-date-section hidden">
+				<label for="select-booking-date">Choose a Date:</label>
+				<input type="date" id="select-booking-date" name="Select Date" min="2020-01-13" max="2050-01-01">
+				<button class="submit-btn" id="submit-date">Submit Date</button>
+			</section>
+
+			<section class="rooms-type hidden">
+				<h2>What Kind of Room are you looking for?</h2>
+				<div class="rooms-type-buttons-section">
+
+				</div>
+			</section>
+
+			<section class="available-rooms hidden">
+				<h2>Available Rooms</h2>
+				<h3>Here are the available Rooms</h3>
+				<div class="final-rooms-section"></div>
+
+			</section>
+
+			<section id="confirm-modal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container final-room-modal">
+						<span onclick="document.getElementById('confirm-modal').style.display='none'"
+							class="w3-button w3 display-topright">&times;</span>
+						<h4>Confirm Booking?</h4>
+						<p class="final-room-modal-text"></p>
+						<input type="button" class="confirm-room-button" value="Confirm Room Booking">
+					</div>
+				</div>
+			</section>
+
+			<section id="login-modal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container final-room-modal">
+						<label for="username">Username:</label>
+						<input type="text" id="username" placeholder="Enter your username">
+						<label for="password">Password:</label>
+						<input type="password" id="password" placeholder="Enter your password">
+						<input type="button" class="confirm-login-button" value="Login">
+					</div>
+				</div>
+			</section>
+			<section id="apology-modal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container final-room-modal">
+						<span onclick="document.getElementById('apology-modal').style.display='none'"
+							class="w3-button w3 display-topright">&times;</span>
+						<h4>We are so sorry, there are No Room available on this date! Please Forgive the inconvience and choose
+							another date!</h4>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer></footer>
+		<script src="bundle.js"></script>
+	</div>
 </body>
+
 </html>

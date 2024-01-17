@@ -1,13 +1,5 @@
 //Will hold all users functions
-/*
-get what bookings they have in our system
-get what bookings they've made in the past for the future
-show them rooms based of a specific:
-	type of room
-show them rooms availability based on a specific date
 
-
-*/
 
 function getCustomerBooking(customer, bookingsArray) {
 	let customerID = customer.id;
@@ -80,50 +72,60 @@ function filterRoomsByDate(specificDate, roomsArray, bookingsArray) {
 
 function generateDateString(year, month, day) {
 	const dateString = `${year}/${month}/${day}`
-  const numericYear = parseInt(year, 10);
-  const numericMonth = parseInt(month, 10);
-  const numericDay = parseInt(day, 10);
+	const numericYear = parseInt(year, 10);
+	const numericMonth = parseInt(month, 10);
+	const numericDay = parseInt(day, 10);
 
-  switch (true) {
-    case isNaN(numericYear) || isNaN(numericMonth) || isNaN(numericDay):
-      return 'Invalid input: Please provide valid values for year, month, and day.';
-    case numericYear < 1990 || numericYear > 2099:
-      return 'Invalid year: Please provide a valid year.';
-    case numericMonth < 1 || numericMonth > 12:
-      return 'Invalid month: Please provide a month between 1 and 12.';
-    case numericDay < 1 || numericDay > 31:
-      return 'Invalid day: Please provide a day between 1 and 31.';
-    default:  
+	switch (true) {
+		case isNaN(numericYear) || isNaN(numericMonth) || isNaN(numericDay):
+			return 'Invalid input: Please provide valid values for year, month, and day.';
+		case numericYear < 1990 || numericYear > 2099:
+			return 'Invalid year: Please provide a valid year.';
+		case numericMonth < 1 || numericMonth > 12:
+			return 'Invalid month: Please provide a month between 1 and 12.';
+		case numericDay < 1 || numericDay > 31:
+			return 'Invalid day: Please provide a day between 1 and 31.';
+		default:
 			return dateString;
-  }
+	}
 }
 
-function testFetch(apiType) {
-	let apiUrl = `http://localhost:3001/api/v1/${apiType}`;
-	fetch(apiUrl)
+function getAllRoomTypes(roomsArray) {
+	let finalArray = [...new Set(roomsArray.map(item => item.roomType))]
+	return finalArray
+}
+
+
+function apiFetch(apiType) {
+	let apiUrl;
+	apiUrl = `http://localhost:3001/api/v1/${apiType}`
+	return fetch(apiUrl)
 		.then(response => response.json())
-		.then(data => console.log(data));
 }
 
-function addNewBooking(user,dateString,roomNumber) {
+function addNewBooking(user, dateString, roomNumber) {
+
+
 	return fetch('http://localhost:3001/api/v1/bookings', {
-    method: 'POST',
-    body: JSON.stringify({
-      "userID": user.id,
-      "date": dateString,
-			"roomNumber":roomNumber,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }) 
-	.then((response) => {
-		if (!response.ok)
-			throw new Error(`Failed to add booking. Status: ${response.status}`);
-		return response.json();
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			"userID": user.id,
+			"date": dateString,
+			"roomNumber": Number(roomNumber)
+		})
 	})
-	.catch((error) => console.log('Error adding booking to bookings API'));
+		.then((response) => {
+			if (!response.ok)
+				throw new Error(`Failed to add booking. Status: ${response.status}`);
+			return response.json();
+		}).then(data => console.log('success!')).then()
+		.catch((error) => console.log('Error adding booking to bookings API'));
 }
+
+
 
 export {
 	getCustomerBooking,
@@ -131,7 +133,10 @@ export {
 	getTotalSpent,
 	filterRoomsByType,
 	filterRoomsByDate,
-	generateDateString
+	generateDateString,
+	apiFetch,
+	getAllRoomTypes,
+	addNewBooking
 }
 
 // testFetch();

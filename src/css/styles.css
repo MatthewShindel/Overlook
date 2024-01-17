@@ -1,3 +1,221 @@
+:root {
+	--yellow-brown: rgba(255, 188, 129, 1);
+	--gray-background: rgba(133, 132, 132, 0.5);
+	--gray-background-heavy: rgba(133, 132, 132, 0.8);
+
+}
+
+html {
+	height: 100%;
+}
+
+
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+	margin: 0;
+	background: linear-gradient(#134d71, #78a7c6, #f7e4bf);
+	background-repeat: no-repeat;
+	font-family: 'Merriweather', serif;
+}
+
+h1{
+	font-family: 'Merriweather', serif;
+}
+p{
+	font-family: 'Merriweather', serif;
+}
+
+.container {
+	background-image: url('/src/images/yosemite.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: #f7e4bf;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+nav ul {
+	display: flex;
+	flex-direction: row;
+	list-style-type: none;
+	justify-content: center;
+	align-items: center;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+
+.nav-button {
+	margin: 1em;
+	border-radius: 10px;
+	border: none;
+	transition: 0.3s;
+	font-size: 20px;
+}
+
+.nav-button:hover {
+	scale: 1.2;
+	transition: 0.3s;
+}
+
+
+.about-yosemite-article article {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 25px 70px;
+}
+
+.user-open-button {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 15px;
+	transition: 0.3s;
+}
+
+
+.w3-modal {
+	backdrop-filter: blur(5px);
+}
+
+.w3-modal-content {
+	width: 400px;
+	background-color: var(--gray-background);
+	border-radius: 25px;
+
+}
+
+.w3-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 25px;
+}
+
+.w3-button {
+	background-color: var(--gray-background);
+	border-radius: 10px;
+	border-color: red;
+	border: #134d71;
+	transition: 0.3s;
+}
+
+.w3-button:hover {
+	background-color: var(--yellow-brown);
+	transition: 0.3s;
+}
+
+
+.final-rooms-section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.displayed-room {
+	flex: 0 0 calc(25% - 20px);
+	margin: 10px;
+	box-sizing: border-box;
+	background-color: var(--gray-background);
+	height: 300px;
+	border: 1px solid #134d71;
+	border-radius: 10px;
+	transition: 0.3s;
+}
+
+.displayed-room:hover {
+	transform: scale(1.2);
+	background-color: #818181;
+	opacity: 80%;
+	transition: 0.3s;
+}
+
+.rooms-type-buttons {
+	margin: 10px;
+}
+
+.hidden {
+	display: none;
+	opacity: 0;
+	transition: opacity 10s ease;
+}
+
+.visible {
+	display: block;
+	opacity: 1;
+}
+
+.sideBar {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	background-color: var(--gray-background-heavy);
+	backdrop-filter: blur(5px);
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
+
+
+
+.sideBar p {
+	padding: 8px 8px 8px 20px;
+	text-decoration: none;
+	font-size: 20px;
+	color: var(--yellow-brown);
+	display: block;
+	transition: 0.3s;
+}
+
+.sideBar p:hover {
+	color: #f1f1f1;
+}
+
+.sideBar .user-close-button {
+	position: absolute;
+	top: 0;
+	right: 15px;
+	font-size: 36px;
+	margin: 0;
+}
+
+.rooms-type-buttons-section {
+	display: flex;
+	justify-content: center;
+
+}
+
+.rooms-type-buttons {
+	border: none;
+	border-radius: 5px;
+	padding: 3px 20px;
+
+}
+
+#submit-date {
+	border-radius: 5px;
+	border: none;
 }
