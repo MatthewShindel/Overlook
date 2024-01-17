@@ -48,7 +48,6 @@ window.addEventListener('load', function () {
 	showLoginModal();
 	getBookingData();
 	getRoomsData();
-	console.log('window has loaded');
 })
 
 confirmLoginButton.addEventListener('click', function () {
@@ -56,7 +55,6 @@ confirmLoginButton.addEventListener('click', function () {
 })
 
 aboutYosemite.addEventListener('click', function () {
-	console.log("Button about-yosemite was pressed");
 	show(aboutYosemiteArticle);
 	hide(selectBookingDateSection);
 	hide(roomsTypeSection);
@@ -65,7 +63,6 @@ aboutYosemite.addEventListener('click', function () {
 
 
 newLogin.addEventListener('click', function () {
-	console.log("Button new-user-login was pressed");
 	showLoginModal()
 })
 
@@ -77,7 +74,6 @@ openUserInfoButton.addEventListener('click', function () {
 closeUserInfoButton.addEventListener('click', closeSideBar);
 
 availableBookings.addEventListener('click', function () {
-	console.log("Button available-bookings was pressed");
 	hide(aboutYosemiteArticle);
 	show(selectBookingDateSection);
 })
@@ -259,4 +255,3 @@ function closeSideBar() {
 	document.getElementById("user-sidebar").style.width = "0px";
 }
 
-console.log('domUpdates.js had been sucessfully loaded');

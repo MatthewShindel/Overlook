@@ -1,13 +1,5 @@
 //Will hold all users functions
-/*
-get what bookings they have in our system
-get what bookings they've made in the past for the future
-show them rooms based of a specific:
-	type of room
-show them rooms availability based on a specific date
 
-
-*/
 
 function getCustomerBooking(customer, bookingsArray) {
 	let customerID = customer.id;
@@ -106,22 +98,13 @@ function getAllRoomTypes(roomsArray) {
 
 function apiFetch(apiType) {
 	let apiUrl;
-	if (apiType === 'customers') {
-		apiUrl = `http://localhost:3001/api/v1/${apiType}`;
-		return fetch(apiUrl)
-			.then(response => response.json())
-		// .then(data => console.log(data)); 
-		//above line for testing
-	} else {
-		apiUrl = `http://localhost:3001/api/v1/${apiType}`
-		return fetch(apiUrl)
-			.then(response => response.json())
-	}
+	apiUrl = `http://localhost:3001/api/v1/${apiType}`
+	return fetch(apiUrl)
+		.then(response => response.json())
 }
 
 function addNewBooking(user, dateString, roomNumber) {
-	// console.log("Inputs for addNewBooking: ",user.id,dateString,roomNumber);
-	// console.log("Typeof: ",typeof user.id, typeof dateString, typeof roomNumber);
+
 
 	return fetch('http://localhost:3001/api/v1/bookings', {
 		method: 'POST',
@@ -142,7 +125,7 @@ function addNewBooking(user, dateString, roomNumber) {
 		.catch((error) => console.log('Error adding booking to bookings API'));
 }
 
-console.log('hello world! customers.js has been properly imported');
+
 
 export {
 	getCustomerBooking,
