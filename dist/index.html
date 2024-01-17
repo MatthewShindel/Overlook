@@ -7,83 +7,115 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap"
+		rel="stylesheet">
 	<title>Explore Yosemite</title>
 </head>
 
 <body>
-	<h1>Explore Yosemite</h1>
-	<nav>
-		<input type="button" value="&#9776; Open User Info" class="user-open-button">
-		<ul>
-			<li><input type="button" value="Available Bookings" class="available-bookings"></li>
-			<li><input type="button" value="About Yosemite" class="about-yosemite"></li>
-			<li><input type="button" value="My Account" class="my-account"></li>
-		</ul>
-	</nav>
-	<main>
-		<section class="about-yosemite-article">
-			<article>
-				<h1>About Yosemite</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-					magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat.</p>
-			</article>
-		</section>
+	<div class="container">
+		<h1>Explore Yosemite</h1>
+		<input role="tab" alt="User Info Tab" type="button" value="&#9776;" class="user-open-button">
+		<nav>
+			<ul>
+				<li><input type="button" value="Available Bookings" class="available-bookings nav-button"></li>
+				<li><input type="button" value="About Yosemite" class="about-yosemite nav-button"></li>
+				<li><input type="button" value="Login as Different User" class="new-user-login nav-button"></li>
+			</ul>
+		</nav>
+		<main>
+			<section class="about-yosemite-article">
+				<article>
+					<h1>About Yosemite</h1>
+					<p>
+						Welcome to an extraordinary getaway nestled at the doorstep of natural wonder, Yosemite National Park! Our
+						hotel offers a unique and unrivaled experience, seamlessly connected to the breathtaking landscapes and
+						awe-inspiring beauty of one of America's most iconic national parks. Yosemite, located in the Sierra Nevada
+						mountains of California, is renowned for its towering granite cliffs, majestic waterfalls, and ancient
+						sequoia trees. As our guest, you'll find yourself surrounded by the splendor of nature, with convenient
+						access to the park's renowned attractions.</p>
+					<p>Immerse yourself in the serenity of Yosemite Valley, where iconic landmarks like El Capitan and Half Dome
+						will captivate your senses. Our hotel provides a perfect basecamp for exploration, ensuring that you're just
+						moments away from the park's most famous trails and viewpoints. Whether you're an avid hiker, a nature
+						enthusiast, or simply seeking a tranquil escape, our accommodations offer the ideal blend of comfort and
+						proximity to Yosemite's wonders. Picture waking up to the crisp mountain air and setting out on a day of
+						adventure, only to return to the welcoming ambiance of our hotel, where the charm of Yosemite seamlessly
+						extends into your lodging experience.</p>
 
-		<section id="user-sidebar" class="sideBar">
-			<p href="javascript:void(0)" class="user-close-button">&times;</p>
-			<div class="user-sidebar-information">
+				</article>
+			</section>
 
-			</div>
-		</section>
+			<section id="user-sidebar" class="sideBar">
+				<p href="javascript:void(0)" class="user-close-button">&times;</p>
+				<div class="user-sidebar-information">
 
-		<section class="select-booking-date-section hidden">
-			<label for="select-booking-date">Choose a Date:</label>
-			<input type="date" id="select-booking-date" name="Select Date" min="2020-01-13" max="2050-01-01">
-			<button class="submit-btn" id="submit-date">Submit Date</button>
-		</section>
-
-		<section class="rooms-type hidden">
-			<h2>What Kind of Room are you looking for?</h2>
-			<div class="rooms-type-buttons-section">
-
-			</div>
-		</section>
-
-		<section class="available-rooms hidden">
-			<h2>Available Rooms</h2>
-			<h3>Here are the available Rooms</h3>
-			<div class="final-rooms-section"></div>
-
-		</section>
-		
-		<section id="confirm-modal" class="w3-modal">
-			<div class="w3-modal-content">
-				<div class="w3-container final-room-modal">
-					<span onclick="document.getElementById('confirm-modal').style.display='none'" class="w3-button w3 display-topright">&times;</span>
-					<h4>Confirm Booking?</h4>
-					<p class="final-room-modal-text"></p>
-					<input type="button" class="confirm-room-button" value="Confirm Room Booking">
 				</div>
-			</div>
-		</section>
+			</section>
 
-		<section id="apology-modal" class="w3-modal">
-			<div class="w3-modal-content">
-				<div class="w3-container final-room-modal">
-					<span onclick="document.getElementById('apology-modal').style.display='none'" class="w3-button w3 display-topright">&times;</span>
-					<h4>We are so sorry, there are No Room available on this date! Please Forgive the inconvience and choose another date!</h4>
+			<section class="select-booking-date-section hidden">
+				<label for="select-booking-date">Choose a Date:</label>
+				<input type="date" id="select-booking-date" name="Select Date" min="2020-01-13" max="2050-01-01">
+				<button class="submit-btn" id="submit-date">Submit Date</button>
+			</section>
+
+			<section class="rooms-type hidden">
+				<h2>What Kind of Room are you looking for?</h2>
+				<div class="rooms-type-buttons-section">
+
 				</div>
-			</div>
-		</section>
+			</section>
 
-	</main>
+			<section class="available-rooms hidden">
+				<h2>Available Rooms</h2>
+				<h3>Here are the available Rooms</h3>
+				<div class="final-rooms-section"></div>
 
-	<footer></footer>
-	<script src="bundle.js"></script>
+			</section>
 
+			<section id="confirm-modal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container final-room-modal">
+						<span onclick="document.getElementById('confirm-modal').style.display='none'"
+							class="w3-button w3 display-topright">&times;</span>
+						<h4>Confirm Booking?</h4>
+						<p class="final-room-modal-text"></p>
+						<input type="button" class="confirm-room-button" value="Confirm Room Booking">
+					</div>
+				</div>
+			</section>
+
+			<section id="login-modal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container final-room-modal">
+						<label for="username">Username:</label>
+						<input type="text" id="username" placeholder="Enter your username">
+
+						<label for="password">Password:</label>
+						<input type="password" id="password" placeholder="Enter your password">
+
+						<input type="button" class="confirm-login-button" value="Login">
+					</div>
+				</div>
+			</section>
+
+			<section id="apology-modal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container final-room-modal">
+						<span onclick="document.getElementById('apology-modal').style.display='none'"
+							class="w3-button w3 display-topright">&times;</span>
+						<h4>We are so sorry, there are No Room available on this date! Please Forgive the inconvience and choose
+							another date!</h4>
+					</div>
+				</div>
+			</section>
+
+		</main>
+
+		<footer></footer>
+		<script src="bundle.js"></script>
+	</div>
 </body>
 
 </html>

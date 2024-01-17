@@ -13,9 +13,10 @@ import {
 
 //Query Selectors:
 const aboutYosemite = document.querySelector('.about-yosemite');
+const aboutYosemiteArticle = document.querySelector('.about-yosemite-article');
 const availableBookings = document.querySelector('.available-bookings');
 const selectBookingDateSection = document.querySelector('.select-booking-date-section')
-const myAccount = document.querySelector('.my-account');
+const newLogin = document.querySelector('.new-user-login');
 const userSidebarInfo = document.querySelector('.user-sidebar-information');
 const openUserInfoButton = document.querySelector('.user-open-button');
 const closeUserInfoButton = document.querySelector('.user-close-button');
@@ -28,6 +29,8 @@ const finalRoomsSection = document.querySelector('.available-rooms');
 const finalRoomsDisplaySection = document.querySelector('.final-rooms-section');
 const finalRoomModal = document.querySelector('.final-room-modal');
 const finalRoomModalText = document.querySelector('.final-room-modal-text')
+const loginModal = document.querySelector('#login-modal');
+const confirmLoginButton = document.querySelector('.confirm-login-button');
 //DOM Variables:
 let currentUser;
 let currentUserBookings;
@@ -42,22 +45,28 @@ let choosenRoom;
 
 //Event Listeners
 window.addEventListener('load', function () {
-	getCurrentUser();
+	showLoginModal();
 	getBookingData();
 	getRoomsData();
 	console.log('window has loaded');
 })
 
+confirmLoginButton.addEventListener('click', function () {
+	loginCustomer()
+})
+
 aboutYosemite.addEventListener('click', function () {
 	console.log("Button about-yosemite was pressed");
-	console.log(roomsData);
+	show(aboutYosemiteArticle);
+	hide(selectBookingDateSection);
+	hide(roomsTypeSection);
+	hide(finalRoomsSection);
 })
 
 
-myAccount.addEventListener('click', function () {
-	console.log("Button my-account was pressed");
-	// console.log('Current User: ', currentUser.name);
-	showAccountInformation(currentUser);
+newLogin.addEventListener('click', function () {
+	console.log("Button new-user-login was pressed");
+	showLoginModal()
 })
 
 openUserInfoButton.addEventListener('click', function () {
@@ -69,14 +78,12 @@ closeUserInfoButton.addEventListener('click', closeSideBar);
 
 availableBookings.addEventListener('click', function () {
 	console.log("Button available-bookings was pressed");
-	// console.log(bookingsData[1]);
+	hide(aboutYosemiteArticle);
 	show(selectBookingDateSection);
 })
 
 selectedDateButton.addEventListener('click', function () {
-	dateSubmissionAction();//generates buttons for availableRoomsTypeSection
-	// console.log("fitlered rooms available: ", availableRooms);
-	// console.log("All filtered Room types: ", availableRoomTypes);
+	dateSubmissionAction();
 	show(roomsTypeSection);
 })
 
@@ -85,19 +92,20 @@ availableRoomTypesButtonSection.addEventListener('click', function (event) {
 	show(finalRoomsSection);
 })
 
-finalRoomsDisplaySection.addEventListener('click' ,  function (event) {
+finalRoomsDisplaySection.addEventListener('click', function (event) {
 	getFinalSelectedRoom(event);
 })
 
-finalRoomModal.addEventListener('click', function (event){
+finalRoomModal.addEventListener('click', function (event) {
 	bookChosenRoom(event)
+
 })
 //Dom Functions:
 
 
 
-function getCurrentUser() {
-	apiFetch('customers')
+function getCurrentUser(userNumber) {
+	apiFetch(`customers/${userNumber}`)
 		.then((customer) => {
 			currentUser = customer
 		})
@@ -121,16 +129,15 @@ function dateSubmissionAction() {
 	const inputValue = selectedDateField.value;
 	const formattedDate = inputValue.replace(/-/g, '/');
 	savedDate = formattedDate;
-	// console.log('Inputed Date: ', savedDate);
 	availableRooms = filterRoomsByDate(formattedDate, roomsData, bookingsData)
 	if (availableRooms === "Error: There are no rooms available on that specific date.") {
-		document.getElementById('apology-modal').style.display='block'
+		document.getElementById('apology-modal').style.display = 'block'
 		return;
-	}else{
+	} else {
 		availableRoomTypes = getAllRoomTypes(availableRooms);
 		availableRoomTypesButtonSection.innerHTML = '';
 		availableRoomTypes.forEach((roomType, index) => {
-		availableRoomTypesButtonSection.innerHTML += `<button class="rooms-type-buttons" id="${roomType}">${capitalizeEachWord(roomType)}</button>`
+			availableRoomTypesButtonSection.innerHTML += `<button class="rooms-type-buttons" id="${roomType}">${capitalizeEachWord(roomType)}</button>`
 		});
 	}
 }
@@ -139,11 +146,10 @@ function getSpecificRoomType(event) {
 	let selectedRoomType;
 	if (event.target.closest('button').classList.contains('rooms-type-buttons')) {
 		selectedRoomType = event.target.closest('button').id
-		// console.log("Select Button ID: ", selectedRoomType);
 		finalRooms = filterRoomsByType(selectedRoomType, availableRooms)
 		displayFilteredRooms(finalRooms);
-	}else{
-
+	} else {
+		return;
 	}
 }
 
@@ -151,12 +157,12 @@ function displayFilteredRooms(roomsArray) {
 	finalRoomsDisplaySection.innerHTML = ''
 	roomsArray.forEach(room => {
 		finalRoomsDisplaySection.innerHTML += `
-		<div tabindex="0" class="displayed-room" id="${room.number}" style="border: 1px solid red;">
+		<div tabindex="0" class="displayed-room" id="${room.number}">
 		<h4>Room: ${room.number}</h4>
 		<p> ${room.numBeds} ${room.bedSize} Size Bed</p>
 		<p>Bidet Included</p>
-		<h5>Cost per Night: ${room.costPerNight}</h5>
-		<input type="button" value="Book Room" onclick="document.getElementById('confirm-modal').style.display='block'" class="w3-button w3-black book-room-button">
+		<h5>Cost per Night: $${room.costPerNight}</h5>
+		<input type="button" value="Book Room" onclick="document.getElementById('confirm-modal').style.display='block'" class="w3-button book-room-button">
 		</div>
 		`
 	})
@@ -166,15 +172,11 @@ function displayFilteredRooms(roomsArray) {
 function getFinalSelectedRoom(event) {
 	if (event.target.closest('input').classList.contains('book-room-button')) {
 		choosenRoom = event.target.closest('div').id;
-		finalRoomModalText.innerHTML =''
+		finalRoomModalText.innerHTML = ''
 		finalRoomModalText.innerHTML += `
 		Are you Booking for Room #${choosenRoom}
 		`
-		// console.log("Room id",choosenRoom);
-		// console.log("Current User",currentUser);
-		// console.log(savedDate);
-		// addNewBooking(currentUser,savedDate,choosenRoom)
-	}else {
+	} else {
 
 	}
 	showAccountInformation(currentUser);
@@ -182,13 +184,17 @@ function getFinalSelectedRoom(event) {
 
 function bookChosenRoom(event) {
 	if (event.target.closest('input').classList.contains('confirm-room-button')) {
-		addNewBooking(currentUser,savedDate,choosenRoom).then(data => {
-			getCurrentUser();
+		addNewBooking(currentUser, savedDate, choosenRoom).then(data => {
+			getCurrentUser(currentUser.id);
 			getBookingData();
 			getRoomsData();
-			document.getElementById('confirm-modal').style.display='none'
+			document.getElementById('confirm-modal').style.display = 'none'
+			hide(finalRoomsSection)
+			hide(roomsTypeSection)
+			hide(selectBookingDateSection)
+			show(aboutYosemiteArticle);
 		})
-	}else {
+	} else {
 		return;
 	}
 }
@@ -198,28 +204,55 @@ function capitalizeEachWord(string) {
 }
 
 function showAccountInformation(user) {
-	let customerBooking = getCustomerBooking(user,bookingsData)
-	
+	let customerBooking = getCustomerBooking(user, bookingsData)
+
 	currentUserBookings = filterBookingsByUser(customerBooking)
-	currentUserTotalSpent = getTotalSpent(customerBooking,roomsData)
+	currentUserTotalSpent = getTotalSpent(customerBooking, roomsData)
 
 	userSidebarInfo.innerHTML = `
-	<p class="user-past-bookings">Past Bookings:${currentUserBookings.pastBookings.length}</p>
-	<p class="user-upcoming-bookings"> Future Bookings:${currentUserBookings.upcomingBookings.length}</p>
-	<p class="user-total-spent">Total Amount Spent:${currentUserTotalSpent}</p>`;
+	<h3 class="user-info">My Account:</h3>
+	<p class="user-info">User Id: ${currentUser.id}</p>
+	<p class="user-info">Past Bookings:${currentUserBookings.pastBookings.length}</p>
+	<p class="user-info"> Future Bookings:${currentUserBookings.upcomingBookings.length}</p>
+	<p class="user-info">Total Amount Spent:${currentUserTotalSpent}</p>`;
+
+}
+
+function showLoginModal() {
+	loginModal.style.display = 'block';
+}
+
+function loginCustomer() {
+	const usernameInput = document.getElementById('username').value
+	const passwordInput = document.getElementById('password').value
+
+	const lastTwoNumbers = usernameInput.slice(-2);
+
+	if ((passwordInput === 'password' || passwordInput === '1')) {
+		alert('Successful Login!')
+		getCurrentUser(lastTwoNumbers)
+		document.getElementById('username').value = '';
+		document.getElementById('password').value = '';
+
+		loginModal.style.display = 'none'
+	} else {
+		alert('Invalid Login Information. Please try Again.')
+	}
 
 }
 
 function hide(element) {
+	element.classList.remove('visible');
 	element.classList.add('hidden');
 }
 
 function show(element) {
 	element.classList.remove('hidden');
+	element.classList.add('visible');
 }
 
 function openSideBar() {
-	document.getElementById("user-sidebar").style.width = "250px";
+	document.getElementById("user-sidebar").style.width = "200px";
 }
 
 function closeSideBar() {
